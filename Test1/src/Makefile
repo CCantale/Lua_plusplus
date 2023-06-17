@@ -1,46 +1,47 @@
-CC			=		g++
+CC		=		g++
 FLAGS		=		-Wall -Wextra -Werror
-INCLUDES	=		-I$(CURDIR)/lua_includes
-LINKS		=		-Llib -lmingw32 -L.. -llua54 -lSDL2 -lSDL2main -lSDL2_image
 
-NAME		=		../test
+SRC		=		main.cpp \
+				string_utils.cpp \
+				Game/Game.cpp
 
-SRC			=		main.cpp \
-					string_utils.cpp \
-					Game/Game.cpp
+SDLDIR		=		sdl2
+OBJDIR		=		obj
+OBJS		=		$(addprefix $(OBJDIR)/, $(SRC:.cpp=.o))
 
-#OBJDIR		=		obj
-#OBJS		=		$(addprefix $(OBJDIR)\, $(SRC:.cpp=.o))
+INCL		=		-I$(SDLDIR)/include/SDL2 -Ilua_includes
+LINK		=		-L$(SDLDIR)/lib -lSDL2 -lSDL2_image
 
-OBJS		=		$(SRC:.cpp=.o)
+OS		:=		$(shell uname -s)
+
+ifeq ($(OS), Linux)
+	NAME	:=		../linux_test
+else ifeq ($(OS), Darwin)
+	NAME	:=		../mac_test
+else
+	$(error Wrong operating system: $(OS))
+endif
+
 
 
 all: $(NAME)
-
+	@echo "test successfully compiled!"
 
 $(NAME): $(OBJS)
-	@$(CC) $^ -o $(NAME) $(LINKS)
-	@echo The executable is ready!
+	@$(CC) $(OBJS) liblua.a -o $(NAME) $(LINK) -ldl
 
-#$(OBJS): $(OBJDIR)/%.o: %.cpp
-#	@mkdir $(@D) 2> NUL
-#	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $(addprefix $(OBJDIR)\, $(<:.cpp=.o))
-
-%.o: %.cpp
-	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $(<:.cpp=.o)
-	@echo Files successfully compiled.
+$(OBJS): $(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(@D)
+	@$(CC) $(INCL) $(FLAGS) -c $< -o $(addprefix $(OBJDIR)/, $(<:.cpp=.o))
 
 clean:
-	del /q /s *.o
+	rm -rf $(OBJDIR)
 
 fclean:
-	del $(NAME).exe
+	rm $(NAME)
 
 re: clean fclean
 	make
 
-play:
-	make
-	$(NAME)
-
 .PHONY: all clean fclean re play
+

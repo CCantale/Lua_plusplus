@@ -12,7 +12,7 @@
 # include <SDL2/SDL.h>
 # include <iostream>
 # include "lua.hpp"
-# include "..\string_utils.h"
+# include "../string_utils.h"
 
 # define LUA_SCRIPT_PATH	"src/script.lua"
 
