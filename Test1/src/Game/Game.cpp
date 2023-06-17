@@ -76,8 +76,6 @@ void	Game::init(char const *title, int _window_posX, int _window_posY,
 		return ;
 	}
 	setBackgroundColor(_L, _background);
-	//SDL_RenderClear(_renderer);
-	//SDL_RenderPresent(_renderer);
 	_running = true;
 }
 
@@ -94,6 +92,38 @@ SDL_Renderer	*Game::getRenderer(void)
 void	Game::quit(void)
 {
 	_running = false;
+}
+
+void	Game::somethingHappened(void)
+{
+	_somethingHappened = true;
+}
+
+void	Game::update(void)
+{
+	SDL_SetRenderDrawColor(	_renderer,
+							_background.r,
+							_background.g,
+							_background.b,
+							_background.a
+							);
+	SDL_RenderClear(_renderer);
+	if (_somethingHappened)
+	{
+		SDL_RenderPresent(_renderer);
+		_somethingHappened = false;
+	}
+}
+
+void	Game::clear(void)
+{
+	if (_window)
+		SDL_DestroyWindow(_window);
+	if (_renderer)
+		SDL_DestroyRenderer(_renderer);
+	if (_L)
+		lua_close(_L);
+	SDL_Quit();
 }
 
 void	Game::handleEvents(void)
@@ -153,36 +183,4 @@ void	Game::handleEvents(void)
 				break ;
 		}
 	}
-}
-
-void	Game::somethingHappened(void)
-{
-	_somethingHappened = true;
-}
-
-void	Game::update(void)
-{
-	SDL_SetRenderDrawColor(	_renderer,
-							_background.r,
-							_background.g,
-							_background.b,
-							_background.a
-							);
-	SDL_RenderClear(_renderer);
-	if (_somethingHappened)
-	{
-		SDL_RenderPresent(_renderer);
-		_somethingHappened = false;
-	}
-}
-
-void	Game::clear(void)
-{
-	if (_window)
-		SDL_DestroyWindow(_window);
-	if (_renderer)
-		SDL_DestroyRenderer(_renderer);
-	if (_L)
-		lua_close(_L);
-	SDL_Quit();
 }

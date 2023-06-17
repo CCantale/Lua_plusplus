@@ -22,12 +22,12 @@ class Game
 		static void			init(char const *title, int window_posX,
 									int window_posY, int width,
 									int height, int fullscreen);
-		static void			handleEvents(void);
 		static void			somethingHappened(void);
 		static void			update(void);
 		static bool			isRunning(void);
 		static void			quit(void);
 		static void			clear(void);
+		static void			handleEvents(void);
 		static SDL_Renderer	*getRenderer(void);
 
 	private:
