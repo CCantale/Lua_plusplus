@@ -9,10 +9,8 @@
 #ifndef BUTTON_HPP
 # define BUTTON_HPP
 
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL.h>
-# include <string>
 # include "../Sprite/Sprite.hpp"
+# include <string>
 
 class	Button
 {
@@ -24,6 +22,7 @@ class	Button
 		virtual			~Button(void);
 		Button			&operator=(Button &toCopy);
 		Sprite			&getSprite(void);
+		int				setSprite(Sprite &sprite);
 		SDL_Rect const	&getRect(void);
 		int				getWidth(void);
 		int				getHeight(void);
@@ -55,7 +54,8 @@ class	Button
 
 	private:
 		void		(*_action)(void) = NULL;
-					Button(void); // please do not create useless, dimentionless, positionless bottons
+					Button(void);	// please do not create useless,
+									// dimentionless, positionless buttons
 };
 
 #endif

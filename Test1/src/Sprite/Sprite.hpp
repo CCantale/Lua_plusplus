@@ -9,9 +9,10 @@
 #ifndef SPRITE_HPP
 # define SPRITE_HPP
 
-# include <SDL2/SDL.h>
-# include <SDL2/SDL_image.h>
+# include <SDL.h>
+# include <SDL_image.h>
 # include <string>
+# include "../Game/Game.hpp"
 
 class	Sprite
 {
@@ -22,7 +23,7 @@ class	Sprite
 						Sprite(int x, int y, int w, int h);
 						Sprite(Sprite const &toCopy);
 						~Sprite(void);
-		Texture			&operator=(Sprite const &toCopy);
+		Sprite			&operator=(Sprite const &toCopy);
 		int				setTexture(std::string const &path);
 		void			setPos(int x, int y);
 		void			setDimentions(int w, int h);

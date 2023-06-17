@@ -3,7 +3,9 @@ FLAGS		=		-Wall -Wextra -Werror
 
 SRC		=		main.cpp \
 				string_utils.cpp \
-				Game/Game.cpp
+				Game/Game.cpp \
+				Sprite/Sprite.cpp \
+				Button/Button.cpp
 
 SDLDIR		=		sdl2
 OBJDIR		=		obj

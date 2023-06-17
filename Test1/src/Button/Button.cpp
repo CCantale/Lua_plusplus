@@ -104,8 +104,8 @@ int	Button::setSprite(Sprite &sprite)
 
 int	Button::setTexture(std::string const &texturePath)
 {
-	if (this->_sprite.setTexture(texturePath) < 0)
-		return (-1)
+	if (this->_sprite->setTexture(texturePath) < 0)
+		return (-1);
 	return (0);
 }
 
