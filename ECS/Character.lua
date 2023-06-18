@@ -16,11 +16,4 @@ function	Character:new(name, strength, hp)
 	return obj
 end
 
-ccantale = Character:new("ccantale", 100, 200)
-ccantale.mage = true
-print(string.format("Character.mage = %s\n", Character.mage))
-print(string.format("ccantale.mage = %s\n", ccantale.mage))
-
-Entity.mage = true
-print(string.format("Character.mage = %s\n", Character.mage))
-
+return Character
