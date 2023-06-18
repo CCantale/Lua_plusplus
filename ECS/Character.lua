@@ -1,4 +1,4 @@
-Entity = require("Lua_plusplus.Entity")
+Entity = require("Entity")
 
 Character = Entity:new()
 table.insert(Character, name)
@@ -17,6 +17,10 @@ function	Character:new(name, strength, hp)
 end
 
 ccantale = Character:new("ccantale", 100, 200)
-print(Character.mage)
-print(ccantale.mage)
+ccantale.mage = true
+print(string.format("Character.mage = %s\n", Character.mage))
+print(string.format("ccantale.mage = %s\n", ccantale.mage))
+
+Entity.mage = true
+print(string.format("Character.mage = %s\n", Character.mage))
 
