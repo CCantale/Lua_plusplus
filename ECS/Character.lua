@@ -1,9 +1,11 @@
 Entity = require("Entity")
 
-Character = Entity:new()
-table.insert(Character, name)
-table.insert(Character, strength)
-table.insert(Character, hp)
+Character = {
+				name,
+				strength,
+				hp
+			}
+Character = Entity:new(Character)
 
 function	Character:new(name, strength, hp)
 	local	obj = obj or {}
