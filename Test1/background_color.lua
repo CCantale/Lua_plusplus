@@ -2,7 +2,6 @@ BACKGROUND = { r = 250, g = 255, b = 255, a = 255 }
 
 
 
-
 -- Set background color values --
 
 
@@ -16,14 +15,6 @@ BACKGROUND.a = 255
 
 
 ---------------------------------
-
-
-
-
-
-
-
-
 
 
 
