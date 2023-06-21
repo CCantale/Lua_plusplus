@@ -1,22 +1,43 @@
+deepcopy = require("deepcopy")
+
 components_nbr = 0
 
-Components_list = {}
+Component = { 
+				ID		=	0,
+				list	=	{},
 
-Component = { signature = 0, list = {}, content = {}}
+				new		=	function(self, entity_ID)
+					local	new_component = deepcopy(self)
 
-function	Component:new(new_component, id, content) -- no!! This gets called not only once, but every time you need to add a new actual component!!
-	local	obj = new_component or {}
+					new_component.entity_ID = entity_ID
+					table.insert(self.list, new_component) 
+					return self.ID
+				end
+			}
 
-	setmetatable(obj, self)
-	self._index = self
-	obj.signature = 2^components_nbr
-	table.insert(new_component.list, content)
+function	new_component_blueprint(blueprint, list)
+	setmetatable(blueprint, { __index = Component })
+	blueprint.ID = 2^components_nbr
+	blueprint.list = list
+	components_nbr = components_nbr + 1
+	return blueprint
 end
 
+info = {}
+physics = {}
 
-info = { list = {} }
-Component:new(info, { name = "No name", id = 0})
+Components_list = {
+					info = new_component_blueprint({ name = "No name", age = 0}, info),
+					physics = new_component_blueprint({ speed = 0, weight = 0}, physics)
+				}
 
+function	Components_list:nbr()
+	local	nbr = 0
 
+	for _, _ in pairs(self) do
+		nbr = nbr + 1
+	end
+	return nbr - 1 -- remove this same function from the count, since it is technically inside the table as well
+end
 
 return Components_list
