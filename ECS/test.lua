@@ -9,7 +9,7 @@ print(Entity.signatures[me])
 Comp_lists.info[me].name = "Claudio"
 print(Comp_lists.info[me].name)
 
---print(physics[me].speed) -- it's gonna be better with a getter
+print(Comp_lists.physics[me].speed) -- it's gonna be better with a getter
 
 
 --					TO DEVELOP
