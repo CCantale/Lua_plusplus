@@ -1,12 +1,15 @@
 Entity = require("Entity")
+Comp_lists = require("Component_lists")
 
 me = Entity.new("info", "hello", "info")
 Entity.add_components(me, "physics", "info")
 print(me)
 print(Entity.signatures[me])
 
-print(info[me].name)
-print(physics[me].speed) -- it's gonna be better with a getter
+Comp_lists.info[me].name = "Claudio"
+print(Comp_lists.info[me].name)
+
+--print(physics[me].speed) -- it's gonna be better with a getter
 
 
 --					TO DEVELOP
