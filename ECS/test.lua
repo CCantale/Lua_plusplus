@@ -1,12 +1,13 @@
 Entity = require("Entity")
 
-me = Entity.new("info", "physics", "hello")
-Entity.add_components(me, "physics") -- fuck! What if I add it twice?? Should check the signature first..., even in new()
+me = Entity.new("info", "hello", "info")
+Entity.add_components(me, "physics", "info")
 print(me)
-print(Entities[me])
+print(Entity.signatures[me])
 
 print(info[me].name)
 print(physics[me].speed) -- it's gonna be better with a getter
+
 
 --					TO DEVELOP
 --

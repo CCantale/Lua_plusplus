@@ -1,8 +1,6 @@
 deepcopy = require("deepcopy")
 
-components_nbr = 0
-
-Component = { 
+local Component = { 
 				ID		=	0,
 				list	=	{},
 
@@ -15,29 +13,23 @@ Component = {
 				end
 			}
 
-function	new_component_blueprint(blueprint, list)
+local function	new_component_blueprint(blueprint, list)
 	setmetatable(blueprint, { __index = Component })
-	blueprint.ID = 2^components_nbr
+	blueprint.ID = 2^Component_blueprints.nbr
 	blueprint.list = list
-	components_nbr = components_nbr + 1
+	Component_blueprints.nbr = Component_blueprints.nbr + 1
 	return blueprint
 end
+
 
 info = {}
 physics = {}
 
-Components_list = {
-					info = new_component_blueprint({ name = "No name", age = 0}, info),
-					physics = new_component_blueprint({ speed = 0, weight = 0}, physics)
-				}
+Component_blueprints = {}
 
-function	Components_list:nbr()
-	local	nbr = 0
+Component_blueprints.nbr = 0
 
-	for _, _ in pairs(self) do
-		nbr = nbr + 1
-	end
-	return nbr - 1 -- remove this same function from the count, since it is technically inside the table as well
-end
+Component_blueprints.info = new_component_blueprint({ name = "No name", age = 0 }, info)
+Component_blueprints.physics = new_component_blueprint({ speed = 0, weight = 0 }, physics)
 
-return Components_list
+return Component_blueprints
