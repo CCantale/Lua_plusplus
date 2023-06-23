@@ -1,7 +1,7 @@
-deepcopy = require("deepcopy")
-Lists = require("Component_lists")
-
+local deepcopy = require("deepcopy")
+local Lists = require("Component_lists")
 local Component = {}
+local Component_blueprints = {}
 
 Component.ID = 0
 Component.self_name = "No name"
@@ -13,7 +13,6 @@ Component.new = function(self, entity_ID)
 					return self.ID
 				end
 
-Component_blueprints = {}
 
 Component_blueprints.nbr = 0
 

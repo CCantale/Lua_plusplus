@@ -1,4 +1,5 @@
-Components = require("Components")
+local Components = require("Components")
+local Entity	= {}
 
 local function	get_newID()
 	if #Entity.freeIDs == 0 then
@@ -10,8 +11,6 @@ local function	get_newID()
 		return new_ID
 	end
 end
-
-Entity	= {}
 
 Entity.signatures = {}
 

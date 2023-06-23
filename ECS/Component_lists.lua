@@ -1,3 +1,3 @@
-Lists = {}
+local Lists = {}
 
 return Lists

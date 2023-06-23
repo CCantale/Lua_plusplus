@@ -1,5 +1,5 @@
-Entity = require("Entity")
-Comp_lists = require("Component_lists")
+local Entity = require("Entity")
+local Comp_lists = require("Component_lists")
 
 me = Entity.new("info", "hello", "info")
 Entity.add_components(me, "physics", "info")
@@ -26,4 +26,4 @@ print(Comp_lists.physics[me].speed) -- it's gonna be better with a getter
 --	end
 ]]
 
-
+return {}
