@@ -1,4 +1,5 @@
 local Components = require("Components")
+local Component_lists = require("Component_lists")
 local Entity	= {}
 
 local function	get_newID()
@@ -15,6 +16,15 @@ end
 Entity.signatures = {}
 
 Entity.freeIDs = {}
+
+Entity.has_component = function(entity, component)
+	if Component_lists:is_component(component) and Entity.signatures[entity] & Components[component].ID > 0 then
+		return true
+	else
+		print(string.format("Error: Entity.has_component(): Entity %d has no \"%s\" component assigned to it", entity, component))
+		return false
+	end
+end
 
 Entity.new = function(...)
 	local	components_toadd = { ... }
@@ -42,28 +52,40 @@ Entity.new = function(...)
 	end
 end
 
-Entity.add_components = function(entity_ID, ...)
-	if not Entity.signatures[entity_ID] then
+Entity.add_components = function(entity, ...)
+	if not Entity.signatures[entity] then
 		print(string.format("Error: \"%s\" no such entity"))
 		return
 	end
-	if not Entity.signatures[entity_ID] then
+	if not Entity.signatures[entity] then
 		return
 	end
 	local	components = { ... }
-	local	new_signature = Entity.signatures[entity_ID]
+	local	new_signature = Entity.signatures[entity]
 
 	for i, v in ipairs(components) do
-		if Components[v] and Entity.signatures[entity_ID] & Components[v].ID == 0 then
-			Components[v]:new(entity_ID)
+		if Components[v] then 
+			Components[v]:new(entity)
 			new_signature = new_signature | Components[v].ID
 		elseif not Components[v] then
 			print(string.format("Error: \"%s\" no such component", v))
 		else
-			print(string.format("Error: Entity \"%d\" already has component \"%s\"", entity_ID, v))
+			print(string.format("Error: Entity \"%d\" already has component \"%s\"", entity, v))
 		end
 	end
-	Entity.signatures[entity_ID] = new_signature
+	Entity.signatures[entity] = new_signature
+end
+
+Entity.get = function(entity, component, attribute)
+	if Entity.has_component(entity, component) and Components[component]:has_attribute(attribute) then
+		return Component_lists[component][entity][attribute]
+	end
+end
+
+Entity.set = function(entity, component, attribute, new_content)
+	if Entity.has_component(entity, component) and Components[component]:has_attribute(attribute) then
+		Component_lists[component][entity][attribute] = new_content
+	end
 end
 
 return Entity

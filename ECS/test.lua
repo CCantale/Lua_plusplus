@@ -1,21 +1,17 @@
 local Entity = require("Entity")
-local Comp_lists = require("Component_lists")
 
-me = Entity.new("info", "hello", "info")
-Entity.add_components(me, "physics", "info")
+me = Entity.new("info")
+Entity.add_components(me, "physics")
 print(me)
 print(Entity.signatures[me])
 
-Comp_lists.info[me].name = "Claudio"
-print(Comp_lists.info[me].name)
-
-print(Comp_lists.physics[me].speed) -- it's gonna be better with a getter
+Entity.set(me, "info", "name", "Claudio")
+Entity.set(me, "physics", "speed", "100")
+print(Entity.get(me, "info", "name"), Entity.get(me, "physics", "speed"), Entity.get(me, "hello", "halo"))
 
 
 --					TO DEVELOP
 --
---Entity.set(me, "name", "Claudio")
---Entity.get(me, "name")
 --Entity:update_component(me, "info", "Claudio", 29)
 --
 --[[function	make_goblin()
@@ -25,5 +21,3 @@ print(Comp_lists.physics[me].speed) -- it's gonna be better with a getter
 --		return goblin
 --	end
 ]]
-
-return {}

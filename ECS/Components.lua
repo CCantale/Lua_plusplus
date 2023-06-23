@@ -12,6 +12,14 @@ Component.new = function(self, entity_ID)
 					Lists[self.self_name][entity_ID] = new_component
 					return self.ID
 				end
+Component.has_attribute = function(self, attribute)
+	if self[attribute] then		
+		return true
+	else
+		print(string.format("Error: Component.has_attribute(): Component \"%s\" has no \"%s\" attribute", self.self_name, attribute))
+		return false
+	end
+end
 
 
 Component_blueprints.nbr = 0
