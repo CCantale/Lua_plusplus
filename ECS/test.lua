@@ -5,10 +5,13 @@ Entity.add_components(me, "physics")
 print(me)
 print(Entity.signatures[me])
 
-Entity.set(me, "info", "name", "Claudio")
-Entity.set(me, "physics", "speed", "100")
-print(Entity.get(me, "info", "name"), Entity.get(me, "physics", "speed"), Entity.get(me, "hello", "halo"))
+Entity.set_attribute(me, "info", "name", "Claudio")
+Entity.set_attribute(me, "physics", "speed", "100")
+print(Entity.get_attribute(me, "info", "name"), Entity.get_attribute(me, "physics", "speed"), Entity.get_attribute(me, "hello", "halo"))
 
+Entity.remove_component(me, "info")
+Entity.add_components(me, "info")
+print(Entity.get_attribute(me, "info", "name"))
 
 --					TO DEVELOP
 --

@@ -76,13 +76,20 @@ Entity.add_components = function(entity, ...)
 	Entity.signatures[entity] = new_signature
 end
 
-Entity.get = function(entity, component, attribute)
+Entity.remove_component = function(entity, component)
+	if Entity.has_component(entity, component) then
+		Component_lists[component][entity] = nil
+		Entity.signatures[entity] = Entity.signatures[entity] ~ Components[component].ID
+	end
+end
+
+Entity.get_attribute = function(entity, component, attribute)
 	if Entity.has_component(entity, component) and Components[component]:has_attribute(attribute) then
 		return Component_lists[component][entity][attribute]
 	end
 end
 
-Entity.set = function(entity, component, attribute, new_content)
+Entity.set_attribute = function(entity, component, attribute, new_content)
 	if Entity.has_component(entity, component) and Components[component]:has_attribute(attribute) then
 		Component_lists[component][entity][attribute] = new_content
 	end
