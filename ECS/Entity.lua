@@ -95,4 +95,22 @@ Entity.set_attribute = function(entity, component, attribute, new_content)
 	end
 end
 
+Entity.clear = function(entity)
+	local component
+	
+	for i = 1, i < 32 do
+		component = Entity.signatures[entity] >> i | 1
+		print(component)
+		if component == 1 then
+			Entity.remove_component(entity, Components[component].self_name)
+		end
+	end
+end
+
+Entity.delete = function(entity)
+	Entity.clear(entity)
+	Entity.signatures[entity] = nil
+	table.insert(Entity.freeIDs, entity)
+end
+
 return Entity

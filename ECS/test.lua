@@ -13,6 +13,7 @@ Entity.remove_component(me, "info")
 Entity.add_components(me, "info")
 print(Entity.get_attribute(me, "info", "name"))
 
+Entity.delete(me)
 --					TO DEVELOP
 --
 --Entity:update_component(me, "info", "Claudio", 29)
